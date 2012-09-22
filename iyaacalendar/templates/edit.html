@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title>New Event</title>
+    <script type="text/javascript"
+        src="${request.static_url('iyaacalendar:static/jquery-1.7.1.js')}"></script>
+</head>
+<body>
+    <h3>${pesan}</h3>
+    <form action="" method="POST" accept-charset="utf-8">
+        <p><label for="schedule">Tanggal</label>
+        <input type="text" name="tanggal" id="tanggal"
+        value="${event['tanggal']}" />
+                Date Format: 22-02-2012 (dd-mm-yyyy)
+              
+        </p>
+        <p><label for="hari">Hari</label>
+        <input type="text" name="hari" id="hari" value="${event['hari']}" />
+        </p>
+        <p><label for="event">Event</label>
+        <% 
+        import html2text
+        agenda = html2text.html2text(event['agenda'])
+        %>
+
+        <input style="width: 300px;" type="text" name="event" id="event"
+        value="${agenda}" /> &nbsp;
+        <input type="text" name="counter" id="counter" value="0" disabled />
+        </p>
+        <p><input type="submit" value="Save"></p>
+        <p><a href=${request.route_url('list')}>Back</a>
+        <a href="${request.route_url('add')}">New</a>
+        </p>
+
+
+    </form> 
+</body>
+<script type="text/javascript" charset="utf-8">
+    $("#counter").val($("#event").val().length);
+    $("#event").keydown(function() {
+        $("#counter").val(parseInt($("#event").val().length));        
+    });
+</script>
+</html>

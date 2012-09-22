@@ -1,0 +1,1 @@
+uwsgi --http :6542 --wsgi-file calendar.wsgi --processes 4 --master --harakiri 60 --harakiri-verbose --limit-post 65536 --max-requests 1000 --close-on-exec --cpu-affinity 2 --http-timeout 180 --post-buffering 8192 --daemonize ./uwsgi-calendar.log --pidfile ./pid_5000.pid --listen 256 --reload-on-as 128 --reload-on-rss 96 --no-orphans

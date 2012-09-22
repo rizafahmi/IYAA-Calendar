@@ -1,0 +1,28 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title>New Event</title>
+</head>
+<body>
+    <a href="${request.route_url('add')}">New Event</a>
+    <table border="1">
+        <tr>
+            <td>Tanggal</td>
+            <td>Hari</td>
+            <td>Event</td>
+            <td>Action</td>
+        </tr>
+        % for data in events:
+        <tr>
+            <td>${data['tanggal']}</td>
+            <td>${data['hari']}</td>
+            <td>${data['agenda']}</td>
+            <td><a href="${request.route_url('edit', event_id=data['_id'])}">Edit</a></td>
+        </tr>
+        % endfor
+
+            </table>
+
+</body>
+</html>
