@@ -1,0 +1,80 @@
+*** Starting uWSGI 1.2.4 (64bit) on [Wed Sep 12 09:38:21 2012] ***
+compiled with version: 4.4.6 20120305 (Red Hat 4.4.6-4) on 10 August 2012 22:48:44
+detected number of CPU cores: 8
+current working directory: /app/web/virtualenv/pyramidenv/IyaaCalendar
+writing pidfile to ./pid_5000.pid
+detected binary path: /app/web/virtualenv/pyramidenv/bin/uwsgi
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+uwsgi socket 0 bound to UNIX address /tmp/uwsgi.sock fd 3
+Python version: 2.6.6 (r266:84292, Jun 18 2012, 14:18:47)  [GCC 4.4.6 20110731 (Red Hat 4.4.6-3)]
+Set PythonHome to /app/web/virtualenv/pyramidenv/IyaaCalendar
+'import site' failed; use -v for traceback
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1e69080
+your server socket listen backlog is limited to 256 connections
+*** Operational MODE: preforking ***
+Loading paste environment: config:/app/web/virtualenv/pyramidenv/IyaaCalendar/production.ini
+ImportError: No module named paste.script.util.logging_config
+ImportError: No module named paste.deploy
+*** Starting uWSGI 1.2.4 (64bit) on [Wed Sep 12 09:39:29 2012] ***
+compiled with version: 4.4.6 20120305 (Red Hat 4.4.6-4) on 10 August 2012 22:48:44
+detected number of CPU cores: 8
+current working directory: /app/web/virtualenv/pyramidenv/IyaaCalendar
+writing pidfile to ./pid_5000.pid
+detected binary path: /app/web/virtualenv/pyramidenv/bin/uwsgi
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+uwsgi socket 0 bound to UNIX address /tmp/uwsgi.sock fd 3
+Python version: 2.6.6 (r266:84292, Jun 18 2012, 14:18:47)  [GCC 4.4.6 20110731 (Red Hat 4.4.6-3)]
+Set PythonHome to /app/web/virtualenv/pyramidenv
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x2674600
+your server socket listen backlog is limited to 256 connections
+*** Operational MODE: preforking ***
+Loading paste environment: config:/app/web/virtualenv/pyramidenv/IyaaCalendar/production.ini
+ImportError: No module named script.util.logging_config
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x2674600 pid: 2201 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 2201)
+spawned uWSGI worker 1 (pid: 2208, cores: 1)
+spawned uWSGI worker 2 (pid: 2209, cores: 1)
+spawned uWSGI worker 3 (pid: 2210, cores: 1)
+spawned uWSGI worker 4 (pid: 2211, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+goodbye to uWSGI.
+*** Starting uWSGI 1.2.4 (64bit) on [Wed Sep 12 09:42:17 2012] ***
+compiled with version: 4.4.6 20120305 (Red Hat 4.4.6-4) on 10 August 2012 22:48:44
+detected number of CPU cores: 8
+current working directory: /app/web/virtualenv/pyramidenv/IyaaCalendar
+writing pidfile to ./pid_5000.pid
+detected binary path: /app/web/virtualenv/pyramidenv/bin/uwsgi
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+uwsgi socket 0 bound to UNIX address /tmp/uwsgi.sock fd 3
+Python version: 2.6.6 (r266:84292, Jun 18 2012, 14:18:47)  [GCC 4.4.6 20110731 (Red Hat 4.4.6-3)]
+Set PythonHome to /app/web/virtualenv/pyramidenv
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xbc5600
+your server socket listen backlog is limited to 256 connections
+*** Operational MODE: preforking ***
+Loading paste environment: config:/app/web/virtualenv/pyramidenv/IyaaCalendar/production.ini
+ImportError: No module named script.util.logging_config
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0xbc5600 pid: 2396 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 2396)
+spawned uWSGI worker 1 (pid: 2403, cores: 1)
+spawned uWSGI worker 2 (pid: 2404, cores: 1)
+spawned uWSGI worker 3 (pid: 2405, cores: 1)
+spawned uWSGI worker 4 (pid: 2406, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+goodbye to uWSGI.

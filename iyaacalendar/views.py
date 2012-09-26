@@ -1,6 +1,7 @@
 from pyramid.view import view_config
 import datetime
 from pyramid.response import Response
+from pyramid.httpexceptions import HTTPFound
 
 
 def allowed_methods(*allowed):
@@ -33,11 +34,7 @@ def get_today(request):
         last_second = datetime.time.max
         tgl_next = datetime.datetime(tanggal.year, tanggal.month, tanggal.day, last_second.hour, last_second.minute, last_second.second)
 
-    #print last_second
-    data = request.db['calendar'].find_one({"tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next},
-        })
-    #data = request.db['calendar'].find({"tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}}).sort('_id', -1)[0]
-    #print data
+    data = request.db['calendar'].find({"tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}}).sort('_id', -1)[0]
     return Response(json.dumps(data, default=json_util.default), headerlist=[('Access-Control-Allow-Origin', '*'), ('Content-Type', 'application/json')])
 
 
@@ -54,12 +51,13 @@ def get_today_olympic(request):
         tgl_next = datetime.datetime(tanggal.year, tanggal.month, tanggal.day, last_second.hour, last_second.minute, last_second.second)
 
     #print last_second
-    count = request.db['calendar'].find({"category": "olimpiade", "tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}}).count()
+    count = request.db['calendar'].find({"tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}}).count()
 
-    data = request.db['calendar'].find({"category": "olimpiade", "tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}})[randint(0, count)]
+    data = request.db['calendar'].find({"tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}})[randint(0, count)]
     #print data
     #return json.dumps(data, sort_keys=True, indent=4, default=json_util.default)
-    if data:
+    print count
+    if count > 0:
         return Response(json.dumps(data, default=json_util.default), headerlist=[('Access-Control-Allow-Origin', '*'), ('Content-Type', 'application/json')])
 
 
@@ -74,19 +72,24 @@ def add_view(request):
         content = content.replace('<p>', '')
         content = content.replace('</p>', '')
 
-        tanggal = datetime.datetime.strptime(request.POST['tanggal'], "%d-%m-%Y")
+        for repeat in range(int(request.POST['repeat'])):
+            tanggal = datetime.datetime.strptime(request.POST['tanggal'], "%d-%m-%Y")
+            tanggal = tanggal + datetime.timedelta(days=repeat)
 
-        new_event = {"tanggal": tanggal,
-                "hari": request.POST['hari'],
-                "agenda": content,
-                "category": "olimpiade"
-                }
+            new_event = {"tanggal": tanggal,
+                    "hari": tanggal.strftime("%A"),
+                    "agenda": content,
+                    "category": "olimpiade"
+                    }
 
-        request.db['calendar'].save(new_event)
+            request.db['calendar'].save(new_event)
+        url = request.route_url('list')
+        return HTTPFound(location=url)
     return {}
 
 
 @view_config(route_name='list', renderer='list.html')
+@view_config(route_name='home', renderer='list.html')
 def list_view(request):
     events = request.db['calendar'].find({"category": "olimpiade"}).sort("tanggal", -1)
     return {"events": events}
@@ -134,3 +137,12 @@ def medali_view(request):
     data.append({'kontingen': kontingen.title(), 'g': g, 's': s, 'b': b, 'total': total})
 
     return {"data": data[1:8]}
+
+
+@view_config(route_name='delete')
+def delete_view(request):
+    import bson
+    from pyramid.httpexceptions import HTTPFound
+
+    request.db['calendar'].remove({"_id": bson.ObjectId(request.matchdict['event_id'])})
+    return HTTPFound(location=request.route_url('list'))

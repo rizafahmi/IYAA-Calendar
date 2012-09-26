@@ -45,7 +45,9 @@ def main(global_config, **settings):
     config.add_route('get_olympic', 'get_olympic/{date}')
     config.add_route('add', '/add')
     config.add_route('list', '/list')
+    config.add_route('home', '/')
     config.add_route('edit', '/edit/{event_id}')
+    config.add_route('delete', '/delete/{event_id}')
     config.add_route('medali', '/medali')
     config.scan()
 
