@@ -34,7 +34,12 @@ def get_today(request):
         last_second = datetime.time.max
         tgl_next = datetime.datetime(tanggal.year, tanggal.month, tanggal.day, last_second.hour, last_second.minute, last_second.second)
 
-    data = request.db['calendar'].find({"tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}}).sort('_id', -1)[0]
+    count = request.db['calendar'].find({"tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}}).sort('_id', -1).count()
+
+    if count > 0:
+        data = request.db['calendar'].find({"tanggal": {"$gte": tgl_no_hour, "$lt": tgl_next}}).sort('_id', -1)[0]
+    else:
+        data = None
     return Response(json.dumps(data, default=json_util.default), headerlist=[('Access-Control-Allow-Origin', '*'), ('Content-Type', 'application/json')])
 
 
@@ -72,7 +77,12 @@ def add_view(request):
         content = content.replace('<p>', '')
         content = content.replace('</p>', '')
 
-        for repeat in range(int(request.POST['repeat'])):
+        tanggal = datetime.datetime.strptime(request.POST['tanggal'], "%d-%m-%Y")
+        repeat = datetime.datetime.strptime(request.POST['toDate'], "%d-%m-%Y")
+        date_diff = repeat - tanggal
+        print date_diff.days
+
+        for repeat in range(int(date_diff.days + 1)):
             tanggal = datetime.datetime.strptime(request.POST['tanggal'], "%d-%m-%Y")
             tanggal = tanggal + datetime.timedelta(days=repeat)
 

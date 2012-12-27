@@ -1,11 +1,16 @@
 <%inherit file="base.html" />
 
 <form action="" method="POST" accept-charset="utf-8">
-    <p><label for="schedule">Date</label>
+    <p><label for="schedule">From Date</label>
         <input type="text" name="tanggal" id="tanggal" value="" placeholder="dd-mm-yyyy" />
     </p>
-    <p><label for="schedule">Repeat For</label>
-        <input class="input-mini" type="text" name="repeat" id="repeat" value="1" /> days.
+    <!-- <p><label for="schedule">Repeat For</label> -->
+    <!--     <input class="input-mini" type="text" name="repeat" id="repeat" value="1" /> days. -->
+    <!-- </p> -->
+    <p><label for="toDate">To Date</label>
+        <input type="text" name="toDate" id="toDate" value=""
+        placeholder="dd-mm-yyyy" />
+    
     </p>
     <p><label for="event">Event</label>
         <input type="text" name="event" id="event" value=""
@@ -24,5 +29,14 @@
       $("#event").keydown(function() {
           $("#counter").val(parseInt($("#event").val().length+1));
       });
+    
+      function setToDate(){
+        var tgl = $("#tanggal").val();
+        $("#toDate").val(tgl);
+      }
+      
+      $("#tanggal").blur(setToDate);
+
+      
 </script>
 </%block>
